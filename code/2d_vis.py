@@ -4,16 +4,25 @@ import math
 import csv
 import os 
 
-file_path = "demo/output/007L_sb_1_4/input_2D/keypoints.npz"
-#file_path = r'C:/Users/cherr/anaconda3/envs/motionAGformer/MotionAGFormer-master/demo/output/007L_sb_1_4/input_2D/keypoints.npz'
+current_directory = os.getcwd()
+print("Current Working Directory:", current_directory)
 
+file_path = 'demo/output/007R_hb_2_5/input_2D/keypoints.npz'
 f = np.load(file_path)
 print('Array Name: ', f.files)  # Array Name:  ['reconstruction']
-#print(a['reconstruction'][0][0]) 
 
-#print(a['reconstruction'].shape)
-#print(a['reconstruction'][0].shape[0])  # 總數
-#print(a['reconstruction'][0][0].shape[0]) #17
+# Access the 'reconstruction' array
+reconstruction = f['reconstruction']
+
+# Print the shape of the 'reconstruction' array
+print('Shape of reconstruction array:', reconstruction.shape)
+
+# Print the shape of the first element in 'reconstruction'
+print('Shape of the first element in reconstruction:', reconstruction[0].shape)
+
+# Print the first element to understand its structure
+print('First element in reconstruction:', reconstruction[0])
+
 
 angles_r = []
 angles_l = []
@@ -92,7 +101,7 @@ with open(output_dir, 'w', newline='') as csvfile:
 fig, axes = plt.subplots(1, 2, figsize=(12, 6))
 
 # 左腳
-axes[0].plot(angles_l, label='Angle_left', color='orange')
+axes[0].plot(angles_l, label='2D_Angles', color='orange')
 axes[0].set_xlabel('Time Step')
 axes[0].set_ylabel('Angle (degrees)')
 axes[0].set_title('Left Angle Variation Over Times')
@@ -100,7 +109,7 @@ axes[0].legend()
 
 
 # 右腳
-axes[1].plot(angles_r, label='Angle_right')
+axes[1].plot(angles_r, label='2D_Angles')
 axes[1].set_xlabel('Time Step')
 axes[1].set_ylabel('Angle (degrees)')
 axes[1].set_title('Right Angle Variation Over Times')
